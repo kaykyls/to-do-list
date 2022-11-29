@@ -9,21 +9,37 @@ const TodoForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setTodo("")
-        console.log(todo)
+        if(todo !== "")
         props.addTodo(todo)
+        setTodo("")
     }
 
+    const randomPlaceholders = [
+        "Walk the dog",
+        "Do the dishes",
+        "Do the homework",
+        "Cut the grass",
+        "Take out the trash",
+        "Do the loundry",
+        "Wash the car",
+        "Water the plants",
+        "Clean the house"
+    ]
+
+    const randomPosition = Math.floor(Math.random() * randomPlaceholders.length)
+    const randomPlaceholder = randomPlaceholders[randomPosition]
+
     return(
-        <form onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
             <input
             type="text"
-            name=""
-            id=""
+            name="todo"
+            id="todo"
             value={todo}
+            placeholder={randomPlaceholder}
             onChange={handleChange}
             />
-            <input type="submit"/>
+            <button><span className="material-symbols-outlined">add_circle</span></button>
         </form>
     )
 }

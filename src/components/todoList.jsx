@@ -7,14 +7,13 @@ const TodoList = () => {
     
     const addTodo = (newTodo) => {
         setTodos([...todos, newTodo])
-        console.log(todos)
     }
 
     return(
-        <Fragment>
+        <div className="todo-list-container">
             <TodoForm addTodo={addTodo}/>
 
-            <ul>
+            <ul className="todo-list">
                 {todos.map((todo, index) => 
                     <TodoItem
                         todo={todo}
@@ -22,7 +21,7 @@ const TodoList = () => {
                     />
                 )}
             </ul>
-        </Fragment>
+        </div>
     )
 }
 
