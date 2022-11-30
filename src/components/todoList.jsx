@@ -4,9 +4,35 @@ import TodoItem from "./todoItem";
 
 const TodoList = () => {
     const [todos, setTodos] = useState([])
+
+    useEffect(() => {
+        if(todos.length > 0) {
+            localStorage.setItem("todos", JSON.stringify(todos))
+            console.log(JSON.parse(localStorage.getItem("todos")))
+        }
+    }, [todos])
+
+    useEffect(() => {
+        setTodos([...JSON.parse(localStorage.getItem("todos"))])
+    }, [])
     
     const addTodo = (newTodo) => {
         setTodos([...todos, newTodo])
+    }
+
+    const deleteTodo = (index) => {
+        if(window.confirm("Do you want to delete this Todo?")) {
+            todos.splice(index, 1)
+            setTodos([...todos])
+        }
+    }
+
+    const updateTodo = (index) => {
+        const updatedTodo = window.prompt()
+        if (updatedTodo !== "" && updatedTodo !== null) {
+            todos[index] = updatedTodo
+            setTodos([...todos])
+        }
     }
 
     return(
@@ -18,6 +44,9 @@ const TodoList = () => {
                     <TodoItem
                         todo={todo}
                         key={index}
+                        id={index}
+                        deleteTodo={deleteTodo}
+                        updateTodo={updateTodo}
                     />
                 )}
             </ul>

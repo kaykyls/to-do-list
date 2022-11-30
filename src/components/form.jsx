@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
 const TodoForm = (props) => {
-    const [todo, setTodo] = useState("")
+    const [todoField, setTodoField] = useState("")
 
     const handleChange = (e) => {
-        setTodo(e.target.value)
+        setTodoField(e.target.value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(todo !== "")
-        props.addTodo(todo)
-        setTodo("")
+        if(todoField !== "")
+        props.addTodo(todoField)
+        setTodoField("")
     }
 
     const randomPlaceholders = [
@@ -35,7 +35,7 @@ const TodoForm = (props) => {
             type="text"
             name="todo"
             id="todo"
-            value={todo}
+            value={todoField}
             placeholder={randomPlaceholder}
             onChange={handleChange}
             />
