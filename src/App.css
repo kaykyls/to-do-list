@@ -115,8 +115,14 @@ button {
   gap: .5rem;
 }
 
-.text input {
+.text input:first-child {
   transform: scale(1.5);
+}
+
+.text input:last-child {
+  font-size: 1.2rem;
+  border: none;
+  pointer-events: none;
 }
 
 .todo-list-container {

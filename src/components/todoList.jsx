@@ -5,17 +5,20 @@ import TodoItem from "./todoItem";
 const TodoList = () => {
     const [todos, setTodos] = useState([])
 
-    useEffect(() => {
+    const storageTodos = () => {
         if(todos.length > 0) {
             localStorage.setItem("todos", JSON.stringify(todos))
-            console.log(JSON.parse(localStorage.getItem("todos")))
         }
-    }, [todos])
+    }
 
-    useEffect(() => {
+    const loadTodos = () =>{
         setTodos([...JSON.parse(localStorage.getItem("todos"))])
-    }, [])
+    }
     
+    useEffect(storageTodos, [todos])
+
+    useEffect(loadTodos, [])
+
     const addTodo = (newTodo) => {
         setTodos([...todos, newTodo])
     }
