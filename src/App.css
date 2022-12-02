@@ -119,13 +119,21 @@ button {
   transform: scale(1.5);
 }
 
-.text input:last-child {
-  font-size: 1.2rem;
-  border: none;
-  pointer-events: none;
-}
-
 .todo-list-container {
   max-height: 500px;
   overflow-y: auto;
+}
+
+.todo-text {
+  border-bottom: 1px solid transparent;
+}
+
+.todo-text-edit {
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.todo-text-edit:focus {
+  outline: none;
 }
