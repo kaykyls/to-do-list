@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const TodoItem = (props) => {
     const [editTodo, setEditTodo] = useState(false)
-    const [editTodoText, setEditTodoText] = useState(props.todo)
+    const [editedTodoText, setEditedTodoText] = useState(props.todo)
 
     useEffect(() => {
         if(editTodo) {
@@ -24,34 +24,47 @@ const TodoItem = (props) => {
         editTodo ? setEditTodo(false) : setEditTodo(true)
     }
 
-    let todoText
-    let buttons
+    const handleChange = (e) => {
+        setEditedTodoText(e.target.value)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        props.updateTodo(editedTodoText, props.id)
+        handleEdit()
+    }
+
+    let itemContainer
 
     if(editTodo) {
-        todoText = <input className="todo-text-edit" type="text" defaultValue={props.todo}></input>
-
-        buttons = <div className="buttons">
-                        <button onClick={handleEdit}><span className="material-symbols-outlined">done</span></button>
-                        <button onClick={handleEdit}><span className="material-symbols-outlined">close</span></button>
+        itemContainer = 
+        <form onSubmit={handleSubmit} className="todo-item-container">
+                <div className="text">
+                    <input onChange={isChecked} type="checkbox"/>
+                    <input onChange={handleChange} className="todo-text-edit" type="text" defaultValue={editedTodoText}></input>
                 </div>
+                <div className="buttons">
+                        <button><span className="material-symbols-outlined">done</span></button>
+                        <button type="button" onClick={handleEdit}><span className="material-symbols-outlined">close</span></button>
+                </div>
+        </form>
     } else {
-        todoText = <span className="todo-text">{props.todo}</span>;
-
-        buttons = <div className="buttons">
-                    <button onClick={handleEdit}><span className="material-symbols-outlined">edit</span></button>
-                    <button onClick={() => props.deleteTodo(props.id)}><span className="material-symbols-outlined">delete</span></button>
-                </div>
+        itemContainer = 
+        <div className="todo-item-container">
+            <div className="text">
+                <input onChange={isChecked} type="checkbox"/>
+                <span className="todo-text">{props.todo}</span>
+            </div>
+            <div className="buttons">
+                <button onClick={handleEdit}><span className="material-symbols-outlined">edit</span></button>
+                <button onClick={() => props.deleteTodo(props.id)}><span className="material-symbols-outlined">delete</span></button>
+            </div>
+        </div>
     }
 
     return (
         <li className="todo-item">
-            <div className="todo-item-container">
-                <div className="text">
-                    <input onChange={isChecked} type="checkbox"/>
-                    {todoText}
-                </div>
-                {buttons}
-            </div>
+            {itemContainer}
         </li>
     )
 }

@@ -30,8 +30,7 @@ const TodoList = () => {
         }
     }
 
-    const updateTodo = (index) => {
-        const updatedTodo = window.prompt()
+    const updateTodo = (updatedTodo, index) => {
         if (updatedTodo !== "" && updatedTodo !== null) {
             todos[index] = updatedTodo
             setTodos([...todos])
