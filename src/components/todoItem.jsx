@@ -14,10 +14,14 @@ const TodoItem = (props) => {
     }, [editTodo])
 
     const isChecked = (e) => {
-        if(e.target.checked)
-        document.querySelector(`li:nth-child(${props.id + 1}) .todo-text`).style.textDecoration = "line-through"
-        else
-        document.querySelector(`li:nth-child(${props.id + 1}) .todo-text`).style.textDecoration = "none"
+        if(e.target.checked) {
+            document.querySelector(`li:nth-child(${props.id + 1}) .todo-text`).style.textDecoration = "line-through"
+            props.storageCheckedTodos(props.id, e.target.checked)
+        }
+        else {
+            document.querySelector(`li:nth-child(${props.id + 1}) .todo-text`).style.textDecoration = "none"
+            props.storageCheckedTodos(props.id, e.target.checked)
+        }
     }
     
     const handleEdit = () => {

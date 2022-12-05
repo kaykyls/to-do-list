@@ -4,6 +4,33 @@ import TodoItem from "./todoItem";
 
 const TodoList = () => {
     const [todos, setTodos] = useState([])
+    const [checkedTodos, setCheckedTodos] = useState([])
+
+    useEffect(() => {
+        checkedTodos.forEach(checkedTodo => {
+            document.querySelector(`li:nth-child(${checkedTodo + 1}) .text input`).checked = true
+        })
+    }, [])
+
+    ///////////////////////////////////////////////////
+    const storageCheckedTodos = (id, isChecked) => {
+        if(isChecked) {
+            setCheckedTodos([...checkedTodos, id])
+            localStorage.setItem("isChecked", JSON.stringify(checkedTodos))
+
+            console.log(isChecked)
+            console.log(JSON.parse(localStorage.getItem("isChecked")))
+        } else {
+            checkedTodos.splice(id, 1)
+            setCheckedTodos([...checkedTodos])
+            localStorage.setItem("isChecked", JSON.stringify(checkedTodos))
+
+            console.log(isChecked)
+            console.log(JSON.parse(localStorage.getItem("isChecked")))
+        }
+    }
+    
+    ///////////////////////////////////////////////////
 
     const storageTodos = () => {
         if(todos.length > 0) {
@@ -49,6 +76,7 @@ const TodoList = () => {
                         id={index}
                         deleteTodo={deleteTodo}
                         updateTodo={updateTodo}
+                        storageCheckedTodos={storageCheckedTodos}
                     />
                 )}
             </ul>
