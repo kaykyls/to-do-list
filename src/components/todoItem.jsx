@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const TodoItem = (props) => {
     const [editTodo, setEditTodo] = useState(false)
