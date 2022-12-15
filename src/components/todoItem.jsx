@@ -1,26 +1,33 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const TodoItem = (props) => {
     const [editTodo, setEditTodo] = useState(false)
     const [editedTodoText, setEditedTodoText] = useState(props.todo)
+    const inputRef = useRef(null);
 
     useEffect(() => {
         if(editTodo) {
-            const inputEdit = document.querySelector(`li:nth-child(${props.id + 1}) .todo-text-edit`)
-            inputEdit.focus()
-        }   
-    }, [editTodo])
+            inputRef.current.focus();
+        }
+    }, [editTodo]);
 
-    const isChecked = (e) => {
+    console.log(document.querySelector(`.todo-item:nth-child(${props.id}) .text input:nth-child(1)`))
+
+    useEffect(() => {
+        if(props.isComplete) {
+            // console.log(document.querySelector(`.todo-item:nth-child(${props.id}) .text input:nth-child(1)`))
+        } else {
+            // document.querySelector(`.todo-item:nth-child(${props.id}) .text input:nth-child(1)`).checked = false
+        }
+    })
+
+    const handleComplete = (e) => {
         if(e.target.checked) {
-            document.querySelector(`li:nth-child(${props.id + 1}) .todo-text`).style.textDecoration = "line-through"
-            props.storageCheckedTodos(props.id, e.target.checked)
+            props.updateTodo(props.todo, true, props.id)
         }
         else {
-            document.querySelector(`li:nth-child(${props.id + 1}) .todo-text`).style.textDecoration = "none"
-            props.storageCheckedTodos(props.id, e.target.checked)
+            props.updateTodo(props.todo, false, props.id)
         }
     }
     
@@ -34,41 +41,44 @@ const TodoItem = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        props.updateTodo(editedTodoText, props.id)
+        props.updateTodo(editedTodoText, props.isComplete, props.id)
         handleEdit()
     }
 
-    let itemContainer
-
-    if(editTodo) {
-        itemContainer = 
-        <form onSubmit={handleSubmit} className="todo-item-container">
-                <div className="text">
-                    <input onChange={isChecked} type="checkbox"/>
-                    <input onChange={handleChange} className="todo-text-edit" type="text" defaultValue={editedTodoText}></input>
-                </div>
-                <div className="buttons">
-                        <button><span className="material-symbols-outlined">done</span></button>
-                        <button type="button" onClick={handleEdit}><span className="material-symbols-outlined">close</span></button>
-                </div>
-        </form>
-    } else {
-        itemContainer = 
-        <div className="todo-item-container">
-            <div className="text">
-                <input onChange={isChecked} type="checkbox"/>
-                <span className="todo-text">{props.todo}</span>
-            </div>
-            <div className="buttons">
-                <button onClick={handleEdit}><span className="material-symbols-outlined">edit</span></button>
-                <button onClick={() => props.deleteTodo(props.id)}><span className="material-symbols-outlined">delete</span></button>
-            </div>
-        </div>
+    const handleCancel = () => {
+        setEditedTodoText(props.todo)
+        setEditTodo(false)
     }
 
     return (
         <li className="todo-item">
-            {itemContainer}
+            {editTodo ? (
+                <form onSubmit={handleSubmit} className="todo-item-container">
+                    <div className="text">
+                        <input onChange={handleComplete} type="checkbox"/>
+                        <input onChange={handleChange} ref={inputRef} className="todo-text-edit" type="text" defaultValue={editedTodoText}></input>
+                    </div>
+                    <div className="buttons">
+                        <button><span className="material-symbols-outlined">done</span></button>
+                        <button type="button" onClick={handleCancel}><span className="material-symbols-outlined">close</span></button>
+                    </div>
+                </form>
+            ) : (
+                <div className="todo-item-container">
+                    <div className="text">
+                        <input onChange={handleComplete} type="checkbox"/>
+                        {props.isComplete ? (
+                            <s className="todo-text">{props.todo}</s>
+                        ) : (
+                            <span className="todo-text">{props.todo}</span>
+                        )}
+                    </div>
+                    <div className="buttons">
+                        <button onClick={handleEdit}><span className="material-symbols-outlined">edit</span></button>
+                        <button onClick={() => props.deleteTodo(props.id)}><span className="material-symbols-outlined">delete</span></button>
+                    </div>
+                </div>
+            )}
         </li>
     )
 }

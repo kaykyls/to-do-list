@@ -4,31 +4,30 @@ import TodoItem from "./todoItem";
 
 const TodoList = () => {
     const [todos, setTodos] = useState([])
-    const [checkedTodos, setCheckedTodos] = useState([])
 
-    useEffect(() => {
-        checkedTodos.forEach(checkedTodo => {
-            document.querySelector(`li:nth-child(${checkedTodo + 1}) .text input`).checked = true
-        })
-    }, [])
+    // useEffect(() => {
+    //     checkedTodos.forEach(checkedTodo => {
+    //         document.querySelector(`li:nth-child(${checkedTodo + 1}) .text input`).checked = true
+    //     })
+    // }, [])
 
     ///////////////////////////////////////////////////
-    const storageCheckedTodos = (id, isChecked) => {
-        if(isChecked) {
-            setCheckedTodos([...checkedTodos, id])
-            localStorage.setItem("isChecked", JSON.stringify(checkedTodos))
+    // const storageCheckedTodos = (id, isChecked) => {
+    //     if(isChecked) {
+    //         setCheckedTodos([...checkedTodos, id])
+    //         localStorage.setItem("isChecked", JSON.stringify(checkedTodos))
 
-            console.log(isChecked)
-            console.log(JSON.parse(localStorage.getItem("isChecked")))
-        } else {
-            checkedTodos.splice(id, 1)
-            setCheckedTodos([...checkedTodos])
-            localStorage.setItem("isChecked", JSON.stringify(checkedTodos))
+    //         console.log(isChecked)
+    //         console.log(JSON.parse(localStorage.getItem("isChecked")))
+    //     } else {
+    //         checkedTodos.splice(id, 1)
+    //         setCheckedTodos([...checkedTodos])
+    //         localStorage.setItem("isChecked", JSON.stringify(checkedTodos))
 
-            console.log(isChecked)
-            console.log(JSON.parse(localStorage.getItem("isChecked")))
-        }
-    }
+    //         console.log(isChecked)
+    //         console.log(JSON.parse(localStorage.getItem("isChecked")))
+    //     }
+    // }
     
     ///////////////////////////////////////////////////
 
@@ -38,16 +37,20 @@ const TodoList = () => {
         }
     }
 
+    console.log(todos)
+
     const loadTodos = () =>{
         setTodos([...JSON.parse(localStorage.getItem("todos"))])
     }
+
+    console.log(todos)
     
     useEffect(storageTodos, [todos])
 
     useEffect(loadTodos, [])
 
     const addTodo = (newTodo) => {
-        setTodos([...todos, newTodo])
+        setTodos([...todos, {isComplete: false, text: newTodo}])
     }
 
     const deleteTodo = (index) => {
@@ -57,9 +60,11 @@ const TodoList = () => {
         }
     }
 
-    const updateTodo = (updatedTodo, index) => {
-        if (updatedTodo !== "" && updatedTodo !== null) {
-            todos[index] = updatedTodo
+    const updateTodo = (updatedText, isComplete, index) => {
+        console.log(index)
+        if (updatedText !== "" && updatedText !== null) {
+            todos[index].text = updatedText
+            todos[index].isComplete = isComplete
             setTodos([...todos])
         }
     }
@@ -71,12 +76,13 @@ const TodoList = () => {
             <ul className="todo-list">
                 {todos.map((todo, index) => 
                     <TodoItem
-                        todo={todo}
+                        todo={todo.text}
+                        isComplete={todo.isComplete}
                         key={index}
                         id={index}
                         deleteTodo={deleteTodo}
                         updateTodo={updateTodo}
-                        storageCheckedTodos={storageCheckedTodos}
+                        // storageCheckedTodos={storageCheckedTodos}
                     />
                 )}
             </ul>
