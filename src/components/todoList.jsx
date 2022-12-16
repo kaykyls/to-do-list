@@ -4,7 +4,7 @@ import TodoItem from "./todoItem";
 
 const TodoList = () => {
     const [todos, setTodos] = useState([])
-    const [fitlerComplete, setFilterComplete] = useState(false)
+    const [filter, setFilter] = useState("all")
 
     const storageTodos = () => {
         if(todos.length > 0) {
@@ -41,31 +41,35 @@ const TodoList = () => {
     }
 
     const handleFitlerActive = () => {
-        setFilterComplete(true)
-        if(!fitlerComplete) {
-            document.querySelector(".not-complete-btn").classList.toggle("active")
-            document.querySelector(".all-btn").classList.toggle("active")
-        }
+        setFilter("active")
+        toggleButtons(".active")
     }
 
-    const handleFitlerComplete= () => {
-        setFilterComplete(true)
+    const handleFitlerComplete = () => {
+        setFilter("complete")
+        toggleButtons(".complete")
+
     }
 
     const handleFilterAll = () => {
-        setFilterComplete(false)
-        if(fitlerComplete) {
-            document.querySelector(".all-btn").classList.toggle("active")
-            document.querySelector(".not-complete-btn").classList.toggle("active")
-        }
+        setFilter("all")
+        toggleButtons(".all")
+    }
+
+    const toggleButtons = (button) => {
+        document.querySelector(".active-btn").style.color = "#b6b6b6"
+        document.querySelector(".complete-btn").style.color = "#b6b6b6"
+        document.querySelector(".all-btn").style.color = "#b6b6b6"
+
+        console.log(button)
+        document.querySelector(`${button}-btn`).style.color = "#000"
     }
 
     return(
         <div className="todo-list-container">
             <TodoForm addTodo={addTodo}/>
-
             <ul className="todo-list">
-                { fitlerComplete ? (todos.filter(todo => todo.isComplete === false).map((todo, index) => 
+                {filter === "all" ? (todos.map((todo, index) => 
                     <TodoItem
                         todo={todo.text}
                         isComplete={todo.isComplete}
@@ -74,23 +78,33 @@ const TodoList = () => {
                         deleteTodo={deleteTodo}
                         updateTodo={updateTodo}
                     />
-                )) : (todos.map((todo, index) => 
-                        <TodoItem
-                            todo={todo.text}
-                            isComplete={todo.isComplete}
-                            key={index}
-                            id={index}
-                            deleteTodo={deleteTodo}
-                            updateTodo={updateTodo}
-                        />
-                ))}
+                )) : (filter === "complete"
+                ? todos.filter(todo => todo.isComplete).map((todo, index) => 
+                    <TodoItem
+                        todo={todo.text}
+                        isComplete={todo.isComplete}
+                        key={index}
+                        id={index}
+                        deleteTodo={deleteTodo}
+                        updateTodo={updateTodo}
+                    />) :
+                todos.filter(todo => !todo.isComplete).map((todo, index) => 
+                    <TodoItem
+                        todo={todo.text}
+                        isComplete={todo.isComplete}
+                        key={index}
+                        id={index}
+                        deleteTodo={deleteTodo}
+                        updateTodo={updateTodo}
+                    />)
+                )}
             </ul>
             <div>
                 {todos.length > 0 ?
                 <div className="filter-buttons">
-                    <button className="not-complete-btn active" onClick={handleFitlerActive}>Active</button>
-                    <button className="complete-btn active" onClick={handleFitlerComplete}>Complete</button>
-                    <button className="all-btn" onClick={handleFilterAll}>All</button>
+                    <button className="active-btn" onClick={handleFitlerActive}>Active</button>
+                    <button className="complete-btn" onClick={handleFitlerComplete}>Complete</button>
+                    <button className="all-btn active" onClick={handleFilterAll}>All</button>
                 </div>
                 : null}
                 
