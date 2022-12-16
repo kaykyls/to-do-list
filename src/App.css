@@ -137,3 +137,19 @@ button {
 .todo-text-edit:focus {
   outline: none;
 }
+
+.filter-buttons {
+  display: grid;
+  margin-top: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.filter-buttons button {
+  padding: .5rem;
+  background: #e7e7e7ae;
+  border-radius: 4px;
+}
+
+.active {
+  color: #b6b6b6;
+}

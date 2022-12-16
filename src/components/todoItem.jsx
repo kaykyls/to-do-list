@@ -4,6 +4,7 @@ const TodoItem = (props) => {
     const [editTodo, setEditTodo] = useState(false)
     const [editedTodoText, setEditedTodoText] = useState(props.todo)
     const inputRef = useRef(null);
+    const checkRef = useRef(null)
 
     useEffect(() => {
         if(editTodo) {
@@ -11,26 +12,16 @@ const TodoItem = (props) => {
         }
     }, [editTodo]);
 
-    console.log(document.querySelector(`.todo-item:nth-child(${props.id}) .text input:nth-child(1)`))
-
     useEffect(() => {
-        if(props.isComplete) {
-            // console.log(document.querySelector(`.todo-item:nth-child(${props.id}) .text input:nth-child(1)`))
-        } else {
-            // document.querySelector(`.todo-item:nth-child(${props.id}) .text input:nth-child(1)`).checked = false
-        }
+        props.isComplete ? checkRef.current.checked = true : checkRef.current.checked = false
     })
 
     const handleComplete = (e) => {
-        if(e.target.checked) {
-            props.updateTodo(props.todo, true, props.id)
-        }
-        else {
-            props.updateTodo(props.todo, false, props.id)
-        }
+        e.target.checked ? props.updateTodo(props.todo, true, props.id) : props.updateTodo(props.todo, false, props.id)
     }
     
     const handleEdit = () => {
+        if(!props.isComplete)
         editTodo ? setEditTodo(false) : setEditTodo(true)
     }
 
@@ -54,7 +45,7 @@ const TodoItem = (props) => {
             {editTodo ? (
                 <form onSubmit={handleSubmit} className="todo-item-container">
                     <div className="text">
-                        <input onChange={handleComplete} type="checkbox"/>
+                        <input ref={checkRef} onChange={handleComplete} type="checkbox"/>
                         <input onChange={handleChange} ref={inputRef} className="todo-text-edit" type="text" defaultValue={editedTodoText}></input>
                     </div>
                     <div className="buttons">
@@ -65,7 +56,7 @@ const TodoItem = (props) => {
             ) : (
                 <div className="todo-item-container">
                     <div className="text">
-                        <input onChange={handleComplete} type="checkbox"/>
+                        <input ref={checkRef} onChange={handleComplete} type="checkbox"/>
                         {props.isComplete ? (
                             <s className="todo-text">{props.todo}</s>
                         ) : (
@@ -73,7 +64,8 @@ const TodoItem = (props) => {
                         )}
                     </div>
                     <div className="buttons">
-                        <button onClick={handleEdit}><span className="material-symbols-outlined">edit</span></button>
+                        {!props.isComplete ? (<button onClick={handleEdit}><span className="material-symbols-outlined">edit</span></button>) : null}
+                        
                         <button onClick={() => props.deleteTodo(props.id)}><span className="material-symbols-outlined">delete</span></button>
                     </div>
                 </div>
