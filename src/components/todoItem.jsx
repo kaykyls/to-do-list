@@ -17,7 +17,10 @@ const TodoItem = (props) => {
     })
 
     const handleComplete = (e) => {
+        console.log("aaaaa")
         e.target.checked ? props.updateTodo(props.todo, true, props.id) : props.updateTodo(props.todo, false, props.id)
+        console.log(props.isComplete)
+        console.log(props.id)
     }
     
     const handleEdit = () => {

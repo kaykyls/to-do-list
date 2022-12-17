@@ -146,10 +146,6 @@ button {
 
 .filter-buttons button {
   padding: .5rem;
-  background: #e7e7e7ae;
+  /* color: #e7e7e7; */
   border-radius: 4px;
-}
-
-.active {
-  color: #000;
 }

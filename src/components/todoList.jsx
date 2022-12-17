@@ -24,6 +24,8 @@ const TodoList = () => {
         setTodos([...todos, {isComplete: false, text: newTodo}])
     }
 
+    console.table(todos)
+
     const deleteTodo = (index) => {
         if(window.confirm("Do you want to delete this Todo?")) {
             todos.splice(index, 1)
@@ -61,15 +63,27 @@ const TodoList = () => {
         document.querySelector(".complete-btn").style.color = "#b6b6b6"
         document.querySelector(".all-btn").style.color = "#b6b6b6"
 
-        console.log(button)
         document.querySelector(`${button}-btn`).style.color = "#000"
     }
 
-    return(
-        <div className="todo-list-container">
-            <TodoForm addTodo={addTodo}/>
-            <ul className="todo-list">
-                {filter === "all" ? (todos.map((todo, index) => 
+    let todoList
+
+    if(filter === "all") {
+        todoList = todos.map((todo, index) => 
+        <TodoItem
+            todo={todo.text}
+            isComplete={todo.isComplete}
+            key={index}
+            id={index}
+            deleteTodo={deleteTodo}
+            updateTodo={updateTodo}
+        />)
+    }
+
+    if(filter === "complete") {
+        todoList = todos.map((todo, index) => {
+            if(todo.isComplete) {
+                return (
                     <TodoItem
                         todo={todo.text}
                         isComplete={todo.isComplete}
@@ -78,8 +92,16 @@ const TodoList = () => {
                         deleteTodo={deleteTodo}
                         updateTodo={updateTodo}
                     />
-                )) : (filter === "complete"
-                ? todos.filter(todo => todo.isComplete).map((todo, index) => 
+                )
+            }
+            return null
+        })
+    }
+
+    if(filter === "active") {
+        todoList = todos.map((todo, index) => {
+            if(!todo.isComplete) {
+                return (
                     <TodoItem
                         todo={todo.text}
                         isComplete={todo.isComplete}
@@ -87,17 +109,18 @@ const TodoList = () => {
                         id={index}
                         deleteTodo={deleteTodo}
                         updateTodo={updateTodo}
-                    />) :
-                todos.filter(todo => !todo.isComplete).map((todo, index) => 
-                    <TodoItem
-                        todo={todo.text}
-                        isComplete={todo.isComplete}
-                        key={index}
-                        id={index}
-                        deleteTodo={deleteTodo}
-                        updateTodo={updateTodo}
-                    />)
-                )}
+                    />
+                )
+            }
+            return null
+        })
+    }
+
+    return(
+        <div className="todo-list-container">
+            <TodoForm addTodo={addTodo}/>
+            <ul className="todo-list">
+                {todoList}
             </ul>
             <div>
                 {todos.length > 0 ?
@@ -107,9 +130,9 @@ const TodoList = () => {
                     <button className="all-btn active" onClick={handleFilterAll}>All</button>
                 </div>
                 : null}
-                
-            </div>
+            </div> 
         </div>
+        
     )
 }
 
