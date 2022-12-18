@@ -43,7 +43,7 @@ npm start
 ```
 
 # Preview 📷
-<a href="https://kaykyls.github.io/projects/bmi-calculator/"><img height="400px" width="400px" src="https://cdn.discordapp.com/attachments/766798638139179031/1054128594164662342/Animacao.gif"/></a>
+<a href="https://kaykyls-todo-list.netlify.app/"><img height="400px" width="400px" src="https://cdn.discordapp.com/attachments/766798638139179031/1054128594164662342/Animacao.gif"/></a>
 
 # Technologies
 - React
