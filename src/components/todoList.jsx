@@ -124,13 +124,11 @@ const TodoList = () => {
                     {todoList}
                 </ul>   
             </div>
-            {todos.length > 0 ?
-                <div className="filter-buttons">
-                    <button className="active-btn" onClick={handleFitlerActive}>Active</button>
-                    <button className="complete-btn" onClick={handleFitlerComplete}>Complete</button>
-                    <button className="all-btn active" onClick={handleFilterAll}>All</button>
-                </div>
-            : null}
+            <div className="filter-buttons">
+                <button className="active-btn" onClick={handleFitlerActive}>Active</button>
+                <button className="complete-btn" onClick={handleFitlerComplete}>Complete</button>
+                <button className="all-btn active" onClick={handleFilterAll}>All</button>
+            </div>
         </Fragment>
     )
 }

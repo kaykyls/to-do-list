@@ -14,21 +14,6 @@ const TodoForm = (props) => {
         setTodoField("")
     }
 
-    const randomPlaceholders = [
-        "Walk the dog",
-        "Do the dishes",
-        "Do the homework",
-        "Cut the grass",
-        "Take out the trash",
-        "Do the loundry",
-        "Wash the car",
-        "Water the plants",
-        "Clean the house"
-    ]
-
-    const randomPosition = Math.floor(Math.random() * randomPlaceholders.length)
-    const randomPlaceholder = randomPlaceholders[randomPosition]
-
     return(
         <form className="form" onSubmit={handleSubmit}>
             <input
@@ -36,7 +21,7 @@ const TodoForm = (props) => {
             name="todo"
             id="todo"
             value={todoField}
-            placeholder={randomPlaceholder}
+            placeholder="Add Task"
             onChange={handleChange}
             />
             <button><span className="material-symbols-outlined">add_circle</span></button>
