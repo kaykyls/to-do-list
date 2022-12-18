@@ -13,7 +13,9 @@ const TodoList = () => {
     }
     
     const loadTodos = () =>{
-        setTodos([...JSON.parse(localStorage.getItem("todos"))])
+        if(localStorage.getItem("todos")) {
+            setTodos([...JSON.parse(localStorage.getItem("todos"))])
+        }
     }
 
     useEffect(storageTodos, [todos])
