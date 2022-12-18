@@ -17,10 +17,7 @@ const TodoItem = (props) => {
     })
 
     const handleComplete = (e) => {
-        console.log("aaaaa")
         e.target.checked ? props.updateTodo(props.todo, true, props.id) : props.updateTodo(props.todo, false, props.id)
-        console.log(props.isComplete)
-        console.log(props.id)
     }
     
     const handleEdit = () => {
@@ -67,9 +64,9 @@ const TodoItem = (props) => {
                         )}
                     </div>
                     <div className="buttons">
-                        {!props.isComplete ? (<button onClick={handleEdit}><span className="material-symbols-outlined">edit</span></button>) : null}
+                        {!props.isComplete ? (<button className="edit-btn" onClick={handleEdit}><span className="material-symbols-outlined">edit</span></button>) : null}
                         
-                        <button onClick={() => props.deleteTodo(props.id)}><span className="material-symbols-outlined">delete</span></button>
+                        <button className="delete-btn" onClick={() => props.deleteTodo(props.id)}><span className="material-symbols-outlined">delete</span></button>
                     </div>
                 </div>
             )}

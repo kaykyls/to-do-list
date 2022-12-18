@@ -40,6 +40,10 @@ button {
 
 .content {
   padding: 2rem;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .content h1 {
@@ -97,14 +101,10 @@ button {
   display: flex;
 }
 
-.buttons button:nth-child(2) {
+.delete-btn {
   background: linear-gradient(19deg, #d570694c 0%, #ddd6f342 100%);
 }
 
-.buttons button:first-child {
-  background: linear-gradient(90deg, #74ebd53e 0%, #9face631 100%);
-
-}
 
 .buttons button span{
   padding: .2rem;
@@ -126,6 +126,9 @@ button {
 
 .todo-text {
   border-bottom: 1px solid transparent;
+  max-width: 20ch;
+  /* white-space: initial; */
+  word-wrap: break-word
 }
 
 .todo-text-edit {
@@ -146,6 +149,10 @@ button {
 
 .filter-buttons button {
   padding: .5rem;
-  /* color: #e7e7e7; */
+  color: #b6b6b6;
   border-radius: 4px;
+}
+
+.active {
+  color: #000 !important;
 }

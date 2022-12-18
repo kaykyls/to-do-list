@@ -23,9 +23,7 @@ const TodoList = () => {
     const addTodo = (newTodo) => {
         setTodos([...todos, {isComplete: false, text: newTodo}])
     }
-
-    console.table(todos)
-
+    
     const deleteTodo = (index) => {
         if(window.confirm("Do you want to delete this Todo?")) {
             todos.splice(index, 1)
@@ -50,7 +48,6 @@ const TodoList = () => {
     const handleFitlerComplete = () => {
         setFilter("complete")
         toggleButtons(".complete")
-
     }
 
     const handleFilterAll = () => {
@@ -59,11 +56,11 @@ const TodoList = () => {
     }
 
     const toggleButtons = (button) => {
-        document.querySelector(".active-btn").style.color = "#b6b6b6"
-        document.querySelector(".complete-btn").style.color = "#b6b6b6"
-        document.querySelector(".all-btn").style.color = "#b6b6b6"
+        document.querySelector(".active-btn").classList.remove("active")
+        document.querySelector(".complete-btn").classList.remove("active")
+        document.querySelector(".all-btn").classList.remove("active")
 
-        document.querySelector(`${button}-btn`).style.color = "#000"
+        document.querySelector(`${button}-btn`).classList.add("active")
     }
 
     let todoList
@@ -117,22 +114,22 @@ const TodoList = () => {
     }
 
     return(
-        <div className="todo-list-container">
-            <TodoForm addTodo={addTodo}/>
-            <ul className="todo-list">
-                {todoList}
-            </ul>
-            <div>
-                {todos.length > 0 ?
+        <Fragment>
+            <div className="todo-list-container">
+                    <h1>What's the plan for today?</h1>
+                <TodoForm addTodo={addTodo}/>
+                <ul className="todo-list">
+                    {todoList}
+                </ul>   
+            </div>
+            {todos.length > 0 ?
                 <div className="filter-buttons">
                     <button className="active-btn" onClick={handleFitlerActive}>Active</button>
                     <button className="complete-btn" onClick={handleFitlerComplete}>Complete</button>
                     <button className="all-btn active" onClick={handleFilterAll}>All</button>
                 </div>
-                : null}
-            </div> 
-        </div>
-        
+            : null}
+        </Fragment>
     )
 }
 
