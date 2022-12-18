@@ -118,7 +118,7 @@ const TodoList = () => {
     return(
         <Fragment>
             <div className="todo-list-container">
-                    <h1>What's the plan for today?</h1>
+                <h1>What's the plan for today?</h1>
                 <TodoForm addTodo={addTodo}/>
                 <ul className="todo-list">
                     {todoList}
