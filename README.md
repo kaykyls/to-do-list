@@ -1,1 +1,56 @@
---- EM CONSTRUÇÃO ---
+<div>
+<h1>Todo-List</h1>
+<p>This app is designed to help you manage your tasks and stay organized. With a simple and intuitive interface, you can easily add, edit, and delete items from your to-do list. The app also allows you to mark tasks as complete, so you can keep track of your progress.</p>
+
+<p>
+  <a href="#features">Features</a> •
+  <a href="#preview">Demonstration</a> •
+  <a href="#technologies">Technologies</a>
+</p>
+</div>
+
+---
+
+# Features
+- [x] Add tasks
+- [x] Delete tasks
+- [x] Edit tasks
+- [x] Mark as complete
+- [x] Filter by complete, active, or all
+- [x] Storage in browser local storage
+
+# Prerequisites
+Make sure you have installed all of the following prerequisites:
+
+- Git - Download & Install Git. OSX and Linux machines typically have this already installed.
+- Node.js - Download & Install Node.js and the npm package manager. If you encounter any problems, you can also use this GitHub Gist to install Node.js.
+
+# Running The Application
+```bash
+# Clone the repository
+git clone https://github.com/kaykyls/todo-list.git
+
+# Select the project directory
+cd todo-list
+
+# Install the dependencies
+npm install
+
+# Run the application
+npm start
+```
+
+# Preview 📷
+<a href="https://kaykyls.github.io/projects/bmi-calculator/"><img height="400px" width="400px" src="https://cdn.discordapp.com/attachments/766798638139179031/1054128594164662342/Animacao.gif"/></a>
+
+# Technologies
+- React
+- JavaScript
+- CSS
+- HTML
+
+
+
+
+---
+Made by: kaykyls 👋 [Check out my linkedIn!](https://www.linkedin.com/in/devkayky)
