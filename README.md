@@ -6,7 +6,7 @@
   <a href="#features">Features</a> •
   <a href="#prerequisites">Prerequisites</a> •
   <a href="#running-the-application">Running The Application</a> •
-  <a href="#preview-📷">Preview</a> •
+  <a href="#preview">Preview</a> •
   <a href="#technologies">Technologies</a>
 </p>
 </div>
@@ -42,7 +42,7 @@ npm install
 npm start
 ```
 
-# Preview 📷
+# Preview
 <a href="https://kaykyls-todo-list.netlify.app/"><img height="400px" width="400px" src="https://cdn.discordapp.com/attachments/766798638139179031/1054128594164662342/Animacao.gif"/></a>
 
 # Technologies
@@ -53,6 +53,6 @@ npm start
 
 
 
-
+https://kaykyls-todo-list.netlify.app/
 ---
 Made by: kaykyls 👋 [Check out my linkedIn!](https://www.linkedin.com/in/devkayky)
