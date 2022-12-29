@@ -67,52 +67,54 @@ const TodoList = () => {
 
     let todoList
 
-    if(filter === "all") {
-        todoList = todos.map((todo, index) => 
-        <TodoItem
-            todo={todo.text}
-            isComplete={todo.isComplete}
-            key={index}
-            id={index}
-            deleteTodo={deleteTodo}
-            updateTodo={updateTodo}
-        />)
-    }
+    switch(filter) {
+        case "all":
+            todoList = todos.map((todo, index) => 
+            <TodoItem
+                todo={todo.text}
+                isComplete={todo.isComplete}
+                key={index}
+                id={index}
+                deleteTodo={deleteTodo}
+                updateTodo={updateTodo}
+            />)
+            break
 
-    if(filter === "complete") {
-        todoList = todos.map((todo, index) => {
-            if(todo.isComplete) {
-                return (
-                    <TodoItem
-                        todo={todo.text}
-                        isComplete={todo.isComplete}
-                        key={index}
-                        id={index}
-                        deleteTodo={deleteTodo}
-                        updateTodo={updateTodo}
-                    />
-                )
-            }
-            return null
-        })
-    }
+        case "complete":
+            todoList = todos.map((todo, index) => {
+                if(todo.isComplete) {
+                    return (
+                        <TodoItem
+                            todo={todo.text}
+                            isComplete={todo.isComplete}
+                            key={index}
+                            id={index}
+                            deleteTodo={deleteTodo}
+                            updateTodo={updateTodo}
+                        />
+                    )
+                }
+                return null
+            })
+            break
 
-    if(filter === "active") {
-        todoList = todos.map((todo, index) => {
-            if(!todo.isComplete) {
-                return (
-                    <TodoItem
-                        todo={todo.text}
-                        isComplete={todo.isComplete}
-                        key={index}
-                        id={index}
-                        deleteTodo={deleteTodo}
-                        updateTodo={updateTodo}
-                    />
-                )
-            }
-            return null
-        })
+        case "active":
+            todoList = todos.map((todo, index) => {
+                if(!todo.isComplete) {
+                    return (
+                        <TodoItem
+                            todo={todo.text}
+                            isComplete={todo.isComplete}
+                            key={index}
+                            id={index}
+                            deleteTodo={deleteTodo}
+                            updateTodo={updateTodo}
+                        />
+                    )
+                }
+                return null
+            })
+            break
     }
 
     return(
