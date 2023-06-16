@@ -25,7 +25,7 @@
 Make sure you have installed all of the following prerequisites:
 
 - Git - Download & Install Git. OSX and Linux machines typically have this already installed.
-- Node.js - Download & Install Node.js and the npm package manager. If you encounter any problems, you can also use this GitHub Gist to install Node.js.
+- Node.js - Download & Install Node.js and the npm package manager.
 
 # Running The Application
 ```bash
