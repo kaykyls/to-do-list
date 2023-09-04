@@ -1,5 +1,5 @@
 <div>
-<h1>Todo-List</h1>
+<h1>To-Do-List</h1>
 <p>This app is designed to help you manage your tasks and stay organized. With a simple and intuitive interface, you can easily add, edit, and delete items from your to-do list. The app also allows you to mark tasks as complete, so you can keep track of your progress.</p>
 
 <p>
@@ -30,10 +30,10 @@ Make sure you have installed all of the following prerequisites:
 # Running The Application
 ```bash
 # Clone the repository
-git clone https://github.com/kaykyls/todo-list.git
+git clone https://github.com/kaykyls/to-do-list.git
 
 # Select the project directory
-cd todo-list
+cd to-do-list
 
 # Install the dependencies
 npm install
