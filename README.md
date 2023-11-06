@@ -53,6 +53,6 @@ npm start
 
 
 
-https://kaykyls-todo-list.netlify.app/
+https://kaykyls-to-do-list.netlify.app/
 ---
 Made by: kaykyls 👋 [Check out my linkedIn!](https://www.linkedin.com/in/devkayky)
